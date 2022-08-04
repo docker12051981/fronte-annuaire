@@ -1,0 +1,253 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-user icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark" [routerLink]="['/profile/admin/fonctionnaire']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<form class=" needs-validation col-md-12" [formGroup]="searchFonctionnaire" (ngSubmit)="onSubmitSearch()">
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Chercher un Fonctionnaire
+            </h3>
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Identifiant</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+
+                        <input id="identifiant" type="text" class="form-control" dir="ltr" formControlName="identifiant"
+                            required
+                            [ngClass]="{ 'is-invalid':(submitted || searchFonctionnaire.get('identifiant').touched) && searchFonctionnaire.get('identifiant').errors }">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button class="mb-2 mr-2 btn btn-info">Recherche </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div *ngIf="notFoundMessage!=''" class="alert alert-warning" role="alert">{{notFoundMessage}}</div>
+<form class=" needs-validation col-md-12" [formGroup]="creatacount" (ngSubmit)="onSubmitAcount()">
+    <div class="row col-12" *ngIf="FonctionnaireWithStructure!=null">
+        <div class="col-6">
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            Informations sur le Fonctionnaire
+                        </h3>
+                        <div class="mt-2">
+
+
+                            <div class="card-block text-center">
+                                <div class="user-image">
+                                    <img src="./assets/images/avatars/3.jpg" class="img-radius" style="width: 20%;"
+                                        alt="User-Profile-Image">
+                                </div>
+                                <h4 class="f-w-600 m-t-5 m-b-10 mt-2">
+                                    {{FonctionnaireWithStructure.fonctionnaire.identifiant}}</h4>
+                                <h6 class="f-w-600 m-t-25 m-b-10">
+                                    {{FonctionnaireWithStructure.fonctionnaire.prenom_fr}}
+                                    {{FonctionnaireWithStructure.fonctionnaire.nom_fr}}</h6>
+
+                                <hr>
+                                <p class="text-muted m-t-15">Contact</p>
+                                <ul class="list-unstyled activity-leval">
+                                    <li class="active"></li>
+
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+
+                                <p class="m-t-15 text-muted">
+                                    {{FonctionnaireWithStructure.fonctionnaire.contact.email_prof}}
+                                </p>
+                                <hr>
+                                <p class="m-t-15 text-muted">
+                                    {{FonctionnaireWithStructure.fonctionnaire.contact.num_tel_prof}}
+                                </p>
+                                <hr>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            Informations sur la structure d'affectation
+                        </h3>
+                        <div class="mt-2">
+
+                            <div class="card-block text-center">
+                                <div class="user-image">
+                                    <img src="./assets/images/avatars/log1.png" class="img-radius" style="width: 20%;"
+                                        alt="User-Profile-Image">
+                                </div>
+                                <h4 class="f-w-600 m-t-5 m-b-10">
+                                    {{FonctionnaireWithStructure.structure.abr_fr}}</h4>
+                                <h6 class="f-w-600 m-t-25 m-b-10">
+                                    {{FonctionnaireWithStructure.structure.title}}
+                                </h6>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            Creation de Compte
+                        </h3>
+                    </div>
+
+                    <div class="mt-2">
+
+
+
+
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+
+                                <div class="position-relative row mb-3">
+                                    <div class="row col-12">
+                                        <label for="LibTxt" class="form-label col-sm-5 col-form-label">Identifiant</label>
+                                        <div class="col-md-7">
+                                            <div class="position-relative mb-3">
+
+                                                <input id="login" type="text" class="form-control" dir="ltr"
+                                                    formControlName="login" disabled="true" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-12">
+                                        <label for="LibTxt" class="form-label col-sm-5 col-form-label">Mots de
+                                            passe</label>
+                                        <div class="col-md-7">
+                                            <div class="position-relative mb-3">
+
+                                                <input id="password" type="text" class="form-control" dir="ltr"
+                                                    formControlName="password" required
+                                                    [ngClass]="{ 'is-invalid':(submitteduser || creatacount.get('password').touched) && creatacount.get('password').errors }">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-12">
+
+                                        <label for="LibTxt" class="form-label col-sm-5 col-form-label">Status</label>
+                                        <div class="col-md-7">
+                                            <div class="position-relative mb-3">
+                                                <div *ngFor="let stat of keysstatus()"
+                                                    class="position-relative form-check">
+                                                    <label class="form-label form-check-label">
+                                                        <input name="status" formControlName="status" type="radio"
+                                                            [ngValue]="stat" value="{{stat}}" class="form-check-input"
+                                                            (change)="onItemChange($event.target.value)"
+                                                            [ngClass]="{ 'is-invalid':(submitteduser || creatacount.get('status').touched) && creatacount.get('status').errors }">
+                                                        {{stat}}
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            Affectation de groupe
+                        </h3>
+                        <div class="mt-2">
+
+                            <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display"
+                                [filter]="filter" [(destination)]="confirmed"
+                                (destinationChange)="confirmechange($event)" height="265px" [format]="format"
+                                classe="active"></dual-list>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            Affectation role
+                        </h3>
+
+                        <div class="position-relative mb-3 mt-2">
+
+                            <select class="form-select" aria-label="Default select example" formControlName="role"
+                                style="padding: 0.1rem 0.75rem !important;" [(ngModel)]="defaultrole">
+                                <option *ngFor="let option of keys()" [value]="option">{{ option}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class=" row col-12" style="justify-content:center">
+            <div class="col-5">
+                <button class="mb-2 mr-2 btn btn-block  btn-success">Ajouter l'Utilisateur </button>
+            </div>
+        </div>
+    </div>
+
+
+
+</form>

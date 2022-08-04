@@ -1,0 +1,196 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-sitemap icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark"
+                [routerLink]="['/dashboard/admin/structure/select']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success"
+                [routerLink]="['create']">
+                <i class="fas fa-plus mr-2 ml-2"></i>
+                Nouveau
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-xl-6 col-lg-6">
+            <div class="card">
+                <div class="card-header  bg-info pb-2">
+                    <h4 class="ft-file-plus text-white">Listes des structures
+                    </h4>
+                </div>
+                <div class="card-body">
+
+                    <tree-root #tree [nodes]="nodes" [options]="options" class="tree-node-loading"
+                        (moveNode)="onMoveNode($event)"></tree-root>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-6 col-xl-6 col-lg-6">
+            <div class="card">
+                <div class="card-header  bg-info pb-2">
+                    <h4 class="ft-file-plus text-white">Détail de la structure
+                    </h4>
+                </div>
+                <div class="card-body">
+
+
+                    <div class="col-12" *ngIf="showdetail">
+                        <div class="card user-card">
+                            <div class="card-header">
+                                <button type="button" class="btn btn-info"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-success m-2"><i class="fas fa-cut"></i></button>
+                                <button type="button" class="btn btn-danger"
+                                    (click)="deletstructure(detailstructure.id)"><i class="fas fa-trash"></i></button>
+
+
+                            </div>
+                            <div class="card-block">
+                                <div class="user-image">
+                                    <img src="./assets/images/avatars/log1.png" class="img-radius"
+                                        alt="User-Profile-Image">
+                                </div>
+                                <h4 class="f-w-600 m-t-5 m-b-10">
+                                    {{detailstructure.abr_fr}}</h4>
+                                <h6 class="f-w-600 m-t-25 m-b-10">
+                                    {{detailstructure.title}}</h6>
+
+                                <hr>
+                                <p class="text-muted m-t-15">{{detailstructure.status}}</p>
+                                <ul class="list-unstyled activity-leval">
+                                    <li class="active"></li>
+
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                                <div class="bg-c-blue counter-block m-t-10 p-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <i class="fa fa-user"></i>
+                                            <p class="text-white">12</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <i class="fa fa-suitcase"></i>
+                                            <p class="text-white">210</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <i class="fas fa-sitemap"></i>
+                                            <p class="text-white">20</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="m-t-15  text-black">{{detailstructure.contact.email}}</p>
+                                <hr>
+                                <hr>
+
+                                <div class="row justify-content-center user-social-link">
+                                    <div class="col-auto"><a href="{{detailstructure.contact.social_fb}}"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                    </div>
+                                    <div class="col-auto"><a href="{{detailstructure.contact.social_twitter}}"><i
+                                                class="fab fa-twitter"></i></a>
+                                    </div>
+                                    <div class="col-auto"><a href="{{detailstructure.contact.social_linkdin}}"><i
+                                                class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                    <div class="col-auto"><a href="{{detailstructure.contact.site_web}}"><i
+                                                class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--
+<div class="row container">
+    <div class="main-card mb-3 card">
+        <div class="card-header">
+            <div class="card-header-title font-size-lg text-capitalize fw-normal">Liste des Structures</div>
+        </div>
+        <div class="table-responsive">
+            <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Abréviation</th>
+                        <th class="text-center">Logo</th>
+                        <th class="text-center">Libilé</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Sous Type</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Date Crt</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let str of listStructure ; let j = index">
+                        <td class="text-center text-muted" style="width: 80px;">{{str.abr}}</td>
+                        <td class="text-center" style="width: 80px;">
+                            <img width="40" class="rounded-circle" src="./assets/images/avatars/log1.png" alt="">
+                        </td>
+                        <td class="text-center"><a [routerLink]="">{{str.lib_fr}}</a></td>
+                        <td class="text-center"><a [routerLink]="">{{str.type.lib_fr}}</a></td>
+                        <td class="text-center"><a [routerLink]="">{{str.soustype.lib_fr}}</a></td>
+                        <td class="text-center">
+                            <div class="badge rounded-pill bg-danger">Désactivé</div>
+                        </td>
+                        <td class="text-center">
+                            <span class="pe-2 opacity-6">
+                                <i class="fa fa-business-time"></i>
+                            </span>
+                            12 Dec
+                        </td>
+
+                        <td class="text-center">
+                            <div role="group" class="btn-group-sm btn-group">
+                                <button class="btn-shadow btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button class="btn-shadow btn btn-success"><i class="far fa-edit"></i></button>
+                                <button class="btn-shadow btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="d-block p-4 text-center card-footer">
+            <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+                <span class="me-2 opacity-7">
+                    <i class="fa fa-cog fa-spin"></i>
+                </span>
+                <span class="me-1">voir l'organigrame de la structure selectionné</span>
+            </button>
+        </div>
+    </div>
+</div>
+-->

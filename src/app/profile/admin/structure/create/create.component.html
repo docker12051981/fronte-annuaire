@@ -1,0 +1,409 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-sitemap icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark" [routerLink]="['/profile/admin/structure']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<form class=" needs-validation col-md-12" [formGroup]="addStructure" (ngSubmit)="onSubmit()">
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations de la Structure
+            </h3>
+
+            <div class="position-relative row mb-3">
+                <label for="structureparente" class="form-label col-sm-2 col-form-label">Structure Parent</label>
+                <div class="col-sm-10">
+
+                    <nz-tree-select style="width: 100%" [nzExpandedKeys]="expandKeys" #tree
+                        [nzNotFoundContent]="'pas de resultat'" [nzDropdownClassName]="'widthdropdown'"
+                        [nzSize]="'large'" [nzNodes]="nodes" nzShowSearch nzPlaceHolder="choisir la structure parent"
+                        [(ngModel)]="value" (ngModelChange)="onChange($event)" formControlName="parent">
+                    </nz-tree-select>
+
+                    <!--<ng-select clearAllText="{{'Clear'}}" [items]="listStructure" [virtualScroll]="true"
+                        bindLabel="lib_fr" bindValue="id" [(ngModel)]="selectedparent"
+                        placeholder="{{'Choisir la structure'}}" notFoundText="{{'Pas de structure trouvé'}}"
+                        formControlName="parent" (change)='selectParent($event)' (clear)="onParentClear()">
+                    </ng-select>-->
+
+                </div>
+            </div>
+
+
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibText" class="form-label form-label col-sm-2 col-form-label">Nom</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="libfrancais" class="form-label">Libilé</label>
+                        <input id="lib_fr" type="text" class="form-control" formControlName="lib_fr" required
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('lib_fr').touched) && addStructure.get('lib_fr').errors }">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="abr" class="form-label">Abréviation</label>
+                        <input id="abr_fr" type="text" class="form-control" formControlName="abr_fr" required
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('abr_fr').touched) && addStructure.get('abr_fr').errors }">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">الإسم</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="libarabe" class="form-label" style="text-align:right">الإسم الكامل</label>
+                        <input id="lib_ar" type="text" class="form-control" dir="rtl" formControlName="lib_ar" required
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('lib_ar').touched) && addStructure.get('lib_ar').errors }">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="abr_ar" class="form-label" style="text-align:right">الإسم المختصر</label>
+                        <input id="abr_ar" type="text" class="form-control" dir="rtl" formControlName="abr_ar"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('abr_ar').touched) && addStructure.get('abr_ar').errors }">
+                    </div>
+                </div>
+            </div>
+
+            <div class="position-relative row mb-3">
+                <label for="description_fr" class="form-label form-label col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea id="description_fr" class="form-control" formControlName="description_fr" required
+                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('description_fr').touched) && addStructure.get('description_fr').errors }"></textarea>
+                </div>
+            </div>
+            <div class="position-relative row mb-3">
+                <label for="description_ar" class="form-label form-label col-sm-2 col-form-label">التعريف
+                    بالهيكل</label>
+                <div class="col-sm-10">
+                    <textarea id="description_ar" class="form-control" formControlName="description_ar" required
+                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('description_ar').touched) && addStructure.get('description_ar').errors }"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Type</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="libarabe" class="form-label" style="text-align:right">type</label>
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lsttype" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le type'}}"
+                            notFoundText="{{'Pas de type trouvé'}}" [(ngModel)]="selectedtype" formControlName="type"
+                            (change)='selectType($event)' (clear)="onTypeClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('type').touched) && addStructure.get('type').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="abr_ar" class="form-label" style="text-align:right">sous type</label>
+
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstsoustype" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le sous type'}}"
+                            notFoundText="{{'Pas de sous type trouvé'}}" [(ngModel)]="selectedsoustype"
+                            formControlName="soustype" (change)='selectsousType($event)' (clear)="onsousTypeClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('soustype').touched) && addStructure.get('soustype').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label form-label col-sm-2 col-form-label">Secteure d'activite</label>
+                <div class="col-md-10">
+                    <div class="position-relative mb-3">
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstsecteureacetvite" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="Choisir le secteure d'activite"
+                            notFoundText="{{'Pas de secteure trouvé'}}" [(ngModel)]="selectedsecteure"
+                            formControlName="secteure" (change)='selectsecteureactivite($event)'
+                            (clear)="onsecteureAcitiviteClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('secteure').touched) && addStructure.get('secteure').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="exampleFile" class="form-label col-sm-2 col-form-label">Logo</label>
+                <div class="col-sm-10">
+                    <!-- <input name="file" id="exampleFile" type="file" class="">-->
+                    <small class="form-text text-muted">
+                    </small>
+                </div>
+            </div>
+            <fieldset class="position-relative row mb-3">
+                <legend class="col-form-label col-sm-2">Status</legend>
+                <div class="col-sm-10">
+                    <div *ngFor="let stat of keys()" class="position-relative form-check">
+                        <label class="form-label form-check-label">
+                            <input name="status" formControlName="status" type="radio" [ngValue]="stat" value="{{stat}}"
+                                class="form-check-input" (change)="onItemChange($event.target.value)"
+                                [ngClass]="{ 'is-invalid':(submitted || addStructure.get('status').touched) && addStructure.get('status').errors }">
+                            {{stat}}
+                        </label>
+                    </div>
+
+
+                </div>
+                
+            </fieldset>
+
+
+
+        </div>
+    </div>
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">Adresse</h3>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Région</label>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="libarabe" class="form-label" style="text-align:right">Gouvernorat</label>
+                        <ng-select clearAllText="{{'Clear'}}" [items]="gouvernorat" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le Gouvernorat'}}"
+                            notFoundText="{{'Pas de gouvernorat trouvé'}}" [(ngModel)]="selectedgouvernorat"
+                            formControlName="gouvernorat" (change)='selectGouvernorat($event)'
+                            (clear)="onGouvernoratClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('gouvernorat').touched) && addStructure.get('gouvernorat').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="abr_ar" class="form-label" style="text-align:right">Ville</label>
+
+                        <ng-select clearAllText="{{'Clear'}}" [items]="ville" [virtualScroll]="true" bindLabel="lib_fr"
+                            placeholder="{{'Choisir la ville'}}" notFoundText="{{'Pas de ville trouvé'}}"
+                            [(ngModel)]="selectedville" formControlName="ville" (change)='selectVille($event)'
+                            (clear)="onVilleClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('ville').touched) && addStructure.get('ville').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="abr_ar" class="form-label" style="text-align:right">Délégation</label>
+
+                        <ng-select clearAllText="{{'Clear'}}" [items]="delegation" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir la Délégation'}}"
+                            notFoundText="{{'Pas de Délégation trouvé'}}" [(ngModel)]="selecteddelegation"
+                            formControlName="delegation" (change)='selectDelegation($event)'
+                            (clear)="onDelegationClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('delegation').touched) && addStructure.get('delegation').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="position-relative mb-3">
+                <label for="rue_fr" class="form-label">Rue</label>
+                <input id="rue_fr" type="text" class="form-control" dir="ltr" formControlName="rue_fr"
+                    [ngClass]="{ 'is-invalid':(submitted || addStructure.get('rue_fr').touched) && addStructure.get('rue_fr').errors }">
+            </div>
+            <div class="position-relative mb-3">
+                <label for="rue_ar" class="form-label col-12" style="text-align:right !important">النهج أو
+                    الشارع</label>
+                <input id="rue_ar" type="text" class="form-control" dir="rtl" formControlName="rue_ar"
+                    [ngClass]="{ 'is-invalid':(submitted || addStructure.get('rue_ar').touched) && addStructure.get('rue_ar').errors }">
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="num" class="form-label">Numéro</label>
+                        <input id="num" type="text" class="form-control" formControlName="num"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('num').touched) && addStructure.get('num').errors }">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="position-relative mb-3">
+                        <label for="postal" class="form-label">Code Postal</label>
+                        <input id="postal" type="text" class="form-control" formControlName="postal"
+                            [ngClass]="{ 'is-invalid':(submitted || addStructure.get('postal').touched) && addStructure.get('postal').errors }">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">Contact</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Telephone (+216)</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input id="tel1" placeholder="ex: 71 111 111" type="tel" class="form-control"
+                                        formControlName="tel1"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('tel1').touched) && addStructure.get('tel1').errors }">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input id="tel2" placeholder="ex: 71 111 111" type="tel" class="form-control"
+                                        formControlName="tel2"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('tel2').touched) && addStructure.get('tel2').errors }">
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <h5 class="card-title">Fax (+216)</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-fax"></i></span>
+                                    </div>
+                                    <input id="fax1" placeholder="ex: 71 111 111" type="tel" class="form-control"
+                                        formControlName="fax1"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('fax1').touched) && addStructure.get('fax1').errors }">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-fax"></i></span>
+                                    </div>
+                                    <input id="fax2" placeholder="ex: 71 111 111" type="tel" class="form-control"
+                                        formControlName="fax2"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('fax2').touched) && addStructure.get('fax2').errors }">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Email</h5>
+                            <div>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-text">
+                                        <span class="">@</span>
+                                    </div>
+                                    <input type="email" placeholder="ex: webcni@cni.tn" formControlName="email"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('email').touched) && addStructure.get('email').errors }"
+                                        class="form-control">
+                                </div>
+
+                            </div>
+
+                            <h5 class="card-title">Site Web</h5>
+                            <div>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <input type="url" placeholder="ex: http://www.cni.tn" formControlName="site_web"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('site_web').touched) && addStructure.get('site_web').errors }"
+                                        class="form-control">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Reseaux Social</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-facebook-f"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.facebook.com/CNITUNISIA"
+                                        formControlName="social_fb"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('social_fb').touched) && addStructure.get('social_fb').errors }"
+                                        class="form-control">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-twitter"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.twitter.com/CNITUNISIA"
+                                        formControlName="social_twitter"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('social_twitter').touched) && addStructure.get('social_twitter').errors }"
+                                        class="form-control">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-linkedin"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.linkdin.com/CNITUNISIA"
+                                        formControlName="social_linkdin"
+                                        [ngClass]="{ 'is-invalid':(submitted || addStructure.get('social_linkdin').touched) && addStructure.get('social_linkdin').errors }"
+                                        class="form-control">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer col-12" style="justify-content: center;">
+
+        <div class="form-actions text-center col-md-12">
+            <button type="submit" class="btn btn-raised btn-success col-2 mr" style="margin-left: 10px;">
+                <i class="fas fa-check"></i> Enregistrer
+            </button>
+            <button type="button" (click)="clearForm()" class="btn btn-info btn-raised mr-auto col-2 mr">
+                <i class="fas fa-times"></i>Effacer
+            </button>
+        </div>
+    </div>
+    <br>
+</form>

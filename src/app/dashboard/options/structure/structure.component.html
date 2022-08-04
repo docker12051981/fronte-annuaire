@@ -1,0 +1,69 @@
+<div class="row containair col-12" style="justify-content: center;">
+    <a *ngIf="isAdmin_Centrale" class="card4" [routerLink]="['/profile/admin/structure/']">
+
+        <img class="img-fluid elm0u" src="'../../../../../../assets/images/dashboard/org.png" alt="..." />
+        <h3>Gérer les structures</h3>
+        <p class="small">Creation , Mise a jour , Suppression <br> ex: CNI ...</p>
+        <div class="dimmer"></div>
+        <div class="go-corner" href="#">
+            <div class="go-arrow">
+                →
+            </div>
+        </div>
+    </a>
+
+    <a *ngIf="isAdmin_Structure" class="card4" [routerLink]="['/profile/admin/structure/']">
+
+        <img class="img-fluid elm0u" src="'../../../../../../assets/images/dashboard/org.png" alt="..." />
+        <h3>Gérer les structures</h3>
+        <p class="small">Creation , Mise a jour , Suppression <br> ex: CNI ...</p>
+        <div class="dimmer"></div>
+        <div class="go-corner" href="#">
+            <div class="go-arrow">
+                →
+            </div>
+        </div>
+    </a>
+
+
+    <a *ngIf="isAdmin_Centrale" class="card4" [routerLink]="['/profile/admin/param/type/list']">
+
+        <img class="img-fluid elm0u" src="'../../../../../../assets/images/dashboard/type.png" alt="..." />
+        <h3>Gérer les types des structures</h3>
+        <p class="small">Creation , Mise a jour , Suppression <br> ex: ministère - entreprise - departement...</p>
+        <div class="dimmer"></div>
+        <div class="go-corner" href="#">
+            <div class="go-arrow">
+                →
+            </div>
+        </div>
+    </a>
+
+    <a *ngIf="isAdmin_Centrale" class="card4" [routerLink]="['/profile/admin/param/soustype/list']">
+
+        <img class="img-fluid elm0u" src="'../../../../../../assets/images/dashboard/sous-type.png" alt="..." />
+        <h3>Gérer les sous-types des structures</h3>
+        <p class="small">Creation , Mise a jour , Suppression <br> ex: EPA ,EPNA...</p>
+        <div class="dimmer"></div>
+        <div class="go-corner" href="#">
+            <div class="go-arrow">
+                →
+            </div>
+        </div>
+    </a>
+
+
+    <a *ngIf="isAdmin_Centrale" class="card4" [routerLink]="['/profile/admin/param/secteuractivite/list']">
+
+        <img class="img-fluid elm0u" src="'../../../../../../assets/images/dashboard/secteur.png" alt="..." />
+        <h3>Gérer les secteurs d'activités</h3>
+        <p class="small">Creation , Mise a jour , Suppression <br> ex: Informatique , Tourisme ..</p>
+        <div class="dimmer"></div>
+        <div class="go-corner" href="#">
+            <div class="go-arrow">
+                →
+            </div>
+        </div>
+    </a>
+
+</div>

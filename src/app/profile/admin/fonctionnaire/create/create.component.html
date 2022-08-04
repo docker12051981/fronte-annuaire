@@ -1,0 +1,444 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-user icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark" [routerLink]="['/profile/admin/fonctionnaire']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<form class=" needs-validation col-md-12" [formGroup]="addFonctionnaire" (ngSubmit)="onSubmit()">
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations Personel
+            </h3>
+
+            <div class="position-relative row mb-3">
+                <label for="structureaffectation" class="form-label col-sm-2 col-form-label">Structure
+                    d'Affectation</label>
+                <div class="col-sm-10">
+
+                    <nz-tree-select style="width: 100%" [nzExpandedKeys]="expandKeys" #tree
+                        [nzNotFoundContent]="'pas de resultat'" [nzDropdownClassName]="'widthdropdown'"
+                        [nzSize]="'large'" [nzNodes]="nodes" nzShowSearch
+                        nzPlaceHolder="choisir la structure d'affectation" [(ngModel)]="value"
+                        (ngModelChange)="onChange($event)" formControlName="affectation">
+                    </nz-tree-select>
+
+                    <!--<ng-select clearAllText="{{'Clear'}}" [items]="listStructure" [virtualScroll]="true"
+                        bindLabel="lib_fr" bindValue="id" [(ngModel)]="selectedparent"
+                        placeholder="{{'Choisir la structure'}}" notFoundText="{{'Pas de structure trouvé'}}"
+                        formControlName="parent" (change)='selectParent($event)' (clear)="onParentClear()">
+                    </ng-select>-->
+
+                </div>
+            </div>
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Identification</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="identifiant" class="form-label" style="text-align:left">Login</label>
+                        <input id="identifiant" type="text" class="form-control" dir="ltr" formControlName="identifiant"
+                            required
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('identifiant').touched) && addFonctionnaire.get('identifiant').errors }">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="cin" class="form-label" style="text-align:left">Numero carte d'identite</label>
+                        <input id="cin" type="text" class="form-control" dir="ltr" formControlName="cin"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('cin').touched) && addFonctionnaire.get('cin').errors }">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibText" class="form-label form-label col-sm-2 col-form-label">Nom</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="nom_fr" class="form-label">nom</label>
+                        <input id="nom_fr" type="text" class="form-control" formControlName="nom_fr" required
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('nom_fr').touched) && addFonctionnaire.get('nom_fr').errors }">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="nom_ar" class="form-label">الإسم</label>
+                        <input id="nom_ar" type="text" class="form-control text-right" dir="rtl"
+                            formControlName="nom_ar" required
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('nom_ar').touched) && addFonctionnaire.get('nom_fr').errors }">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Prenom</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="prenom_fr" class="form-label" style="text-align:left">prenom</label>
+                        <input id="prenom_fr" type="text" class="form-control" dir="ltr" formControlName="prenom_fr"
+                            required
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('prenom_fr').touched) && addFonctionnaire.get('prenom_fr').errors }">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="prenom_ar" class="form-label" style="text-align:right">اللقب</label>
+                        <input id="prenom_ar" type="text" class="form-control" dir="rtl" formControlName="prenom_ar"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('prenom_ar').touched) && addFonctionnaire.get('prenom_ar').errors }">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label"></label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="date_naissance" class="form-label" style="text-align:left">date de naissance</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="date_naissance" required formControlName="date_naissance"
+                                    class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
+                                    ngbDatepicker #d="ngbDatepicker"
+                                    [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('date_naissance').touched) && addFonctionnaire.get('date_naissance').errors }">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                        type="button"><i class="far fa-calendar-plus"></i></button>
+                                </div>
+                                <hr />
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="prenom_ar" class="form-label mb-3" style="text-align:right">genre</label>
+                    <div class="position-relative mb-3">
+
+                        <div *ngFor="let sexe of keys()" class="position-relative form-check form-check-inline">
+                            <label class="form-label form-check-label">
+                                <input name="genre" formControlName="genre" type="radio" [ngValue]="sexe"
+                                    value="{{sexe}}" class="form-check-input"
+                                    (change)="onItemChange($event.target.value)"
+                                    [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('genre').touched) && addFonctionnaire.get('genre').errors }">
+                                {{sexe}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations Professionelles
+            </h3>
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Carière</label>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="classelib_fr" class="form-label" style="text-align:right">Classe</label>
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstclasse" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le classe'}}"
+                            notFoundText="{{'Pas de classe trouvé'}}" [(ngModel)]="selectedclasse"
+                            formControlName="classe" (change)='selectClasse($event)' (clear)="onClasseClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('classe').touched) && addFonctionnaire.get('classe').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="gradelib_ar" class="form-label" style="text-align:right">Grade</label>
+
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstgrade" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le grade'}}"
+                            notFoundText="{{'Pas de grade trouvé'}}" [(ngModel)]="selectedgrade" formControlName="grade"
+                            (change)='selectGrade($event)' (clear)="onGradeClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('grade').touched) && addFonctionnaire.get('grade').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="fonctionlib_ar" class="form-label" style="text-align:right">Fonction</label>
+
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstfonction" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir la fonction'}}"
+                            notFoundText="{{'Pas de fonction trouvé'}}" [(ngModel)]="selectedfonction"
+                            formControlName="fonction" (change)='selectFonction($event)' (clear)="onFonctionClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('fonction').touched) && addFonctionnaire.get('fonction').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxtExp" class="form-label col-sm-2 col-form-label">Experience</label>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="diplome" class="form-label" style="text-align:left">diplome</label>
+                        <ng-select clearAllText="{{'Clear'}}" [items]="lstdiplome" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="Choisir le diplome"
+                            notFoundText="{{'Pas de diplome trouvé'}}" [(ngModel)]="selecteddiplome"
+                            formControlName="diplome" (change)='selectDiplome($event)' (clear)="onDiplomeClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('diplome').touched) && addFonctionnaire.get('diplome').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="date_naissance" class="form-label" style="text-align:left">date de
+                            recrutement</label>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="date_recrutement" required formControlName="date_recrutement"
+                                    class="form-control" placeholder="yyyy-mm-dd" name="dp2"
+                                    [(ngModel)]="model_recrutement" ngbDatepicker #dp2="ngbDatepicker"
+                                    [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('date_recrutement').touched) && addFonctionnaire.get('date_recrutement').errors }">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="dp2.toggle()"
+                                        type="button"><i class="far fa-calendar-plus"></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="position" class="form-label" style="text-align:left">Position</label>
+                        <ng-select clearAllText="{{'Clear'}}" [items]="position" [virtualScroll]="true"
+                            bindLabel="lib_fr" placeholder="{{'Choisir le position'}}"
+                            notFoundText="{{'Pas de position trouvé'}}" [(ngModel)]="selectedposition"
+                            formControlName="position" (change)='selectPosition($event)' (clear)="onPositionClear()"
+                            [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('position').touched) && addFonctionnaire.get('position').errors }">
+                        </ng-select>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations de contact
+            </h3>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Télephone professionnel</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input id="num_tel_prof" placeholder="ex: 71 111 111" type="tel"
+                                        class="form-control" formControlName="num_tel_prof"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('num_tel_prof').touched) && addFonctionnaire.get('num_tel_prof').errors }">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input id="poste" placeholder="poste" type="text" class="form-control"
+                                        formControlName="poste"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('poste').touched) && addFonctionnaire.get('poste').errors }">
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <h5 class="card-title">Fax (+216)</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-fax"></i></span>
+                                    </div>
+                                    <input id="num_fax" placeholder="ex: 71 111 111" type="tel" class="form-control"
+                                        formControlName="num_fax"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('num_fax').touched) && addFonctionnaire.get('num_fax').errors }">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="">@-Email</span>
+                                    </div>
+                                    <input id="email_prof" placeholder="ex: 71 111 111" type="email"
+                                        class="form-control" formControlName="email_prof"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('email_prof').touched) && addFonctionnaire.get('email_prof').errors }">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">GSM</h5>
+                            <div>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-text">
+                                        <span class="">S</span>
+                                    </div>
+                                    <input type="tel" placeholder="ex: 98 000 000" formControlName="num_tel_perso"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('num_tel_perso').touched) && addFonctionnaire.get('num_tel_perso').errors }"
+                                        class="form-control">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Email</h5>
+                            <div>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-text">
+                                        <span class="">@</span>
+                                    </div>
+                                    <input type="email" placeholder="ex: foulen@gmail.tn" formControlName="email_perso"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('email_perso').touched) && addFonctionnaire.get('email_perso').errors }"
+                                        class="form-control">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Skype</h5>
+                            <div>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-text">
+                                        <span class="">S</span>
+                                    </div>
+                                    <input type="text" placeholder="foulenbenfoulen" formControlName="skype"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('skype').touched) && addFonctionnaire.get('skype').errors }"
+                                        class="form-control">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Reseaux Social Personel</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-facebook-f"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.facebook.com/CNITUNISIA"
+                                        formControlName="social_fb"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('social_fb').touched) && addFonctionnaire.get('social_fb').errors }"
+                                        class="form-control">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-twitter"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.twitter.com/CNITUNISIA"
+                                        formControlName="social_twitter"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('social_twitter').touched) && addFonctionnaire.get('social_twitter').errors }"
+                                        class="form-control">
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fab fa-linkedin"></i></span>
+                                    </div>
+                                    <input type="url" placeholder="ex: https://www.linkdin.com/CNITUNISIA"
+                                        formControlName="social_linkdin"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFonctionnaire.get('social_linkdin').touched) && addFonctionnaire.get('social_linkdin').errors }"
+                                        class="form-control">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer col-12" style="justify-content: center;">
+
+        <div class="form-actions text-center col-md-12">
+            <button type="submit" class="btn btn-raised btn-success col-2 mr" style="margin-left: 10px;">
+                <i class="fas fa-check"></i> Enregistrer
+            </button>
+            <button type="button" (click)="clearForm()" class="btn btn-info btn-raised mr-auto col-2 mr">
+                <i class="fas fa-times"></i>Effacer
+            </button>
+        </div>
+    </div>
+    <br>
+</form>

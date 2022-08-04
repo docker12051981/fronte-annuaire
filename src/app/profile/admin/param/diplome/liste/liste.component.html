@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header  bg-info pb-2">
+                    <h4 class="ft-file-plus text-white">Gestion des Diplomes
+                    </h4>
+                </div>
+                <div class="card-body server-datatable selection-datatable">
+                    <div class="table-responsive">
+                        <ng2-smart-table [settings]="settings" [source]="listDiplome"
+                            (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onUpdateConfirm($event)"
+                            (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

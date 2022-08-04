@@ -1,0 +1,73 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-user icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark"
+                [routerLink]="['/dashboard/admin-structure/contrat/select']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success"
+                [routerLink]="['create']">
+                <i class="fas fa-plus mr-2 ml-2"></i>
+                Nouveau
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="main-card mb-3 card mt-3">
+    <div class="card-header">
+        Liste des Fournisseurs
+    </div>
+    <div class="table-responsive">
+        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Logo</th>
+                    <th class="text-center">Raison social</th>
+                    <th class="text-center">Num Fiscale</th>
+                    <th class="text-center">Num Tél</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Responsable</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lst of listFournisseurs; let index = index;">
+                    <td class="text-center text-muted">{{index+1}}</td>
+                    <td><img width="40" class="rounded-circle"
+                            src="../../../../../assets/images/dashboard/fournisseur.png" alt=""></td>
+                    <td class="text-center">{{lst.raison_social}}</td>
+                    <td class="text-center">{{lst.matricule_fiscale}}</td>
+                    <td class="text-center">{{lst.num_tel}}</td>
+                    <td class="text-center">{{lst.email}}</td>
+                    <td class="text-center">{{lst.responsable.nom_resp}} {{lst.responsable.prenom_resp}}</td>
+                    <td class="text-center">
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-info">
+                            <i class="fas fa-search"> </i>
+                        </button>
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-success">
+                            <i class="fas fa-edit"> </i>
+                        </button>
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger">
+                            <i class="fas fa-trash"> </i>
+                        </button>
+                    </td>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-block text-center card-footer">
+    </div>
+</div>

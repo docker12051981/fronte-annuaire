@@ -1,0 +1,84 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-user icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark"
+                [routerLink]="['/dashboard/admin/utilisateur/select']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success"
+                [routerLink]="['create']">
+                <i class="fas fa-plus mr-2 ml-2"></i>
+                Nouveau
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row col-12 mb-4">
+    <nz-tree-select style="width: 100%" [nzExpandedKeys]="expandKeys" #tree [nzNotFoundContent]="'pas de resultat'"
+        [nzDropdownClassName]="'widthdropdown'" [nzSize]="'large'" [nzNodes]="nodes" nzShowSearch
+        nzPlaceHolder="choisir la structure d'affectation" [(ngModel)]="value" (ngModelChange)="onChange($event)">
+    </nz-tree-select>
+</div>
+
+<div class="main-card mb-3 card mt-3">
+    <div class="card-header">
+        Liste des Utilisateurs
+    </div>
+    <div class="table-responsive">
+        <div *ngIf="notFoundMessage!=''" class="alert alert-warning" role="alert">{{notFoundMessage}}</div>
+        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>status</th>
+                    <th class="text-center">Organisme</th>
+                    <th class="text-center">Login</th>
+                    <th class="text-center">Mots de passe</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lst of listUsers; let index = index;">
+                    <td class="text-center text-muted">{{index+1}}</td>
+                    <td><img width="40" src="../../../../../assets/images/avatars/on-button.png" alt=""></td>
+                    <td class="text-center">CNI</td>
+                    <td class="text-center">{{lst.identifiant}}</td>
+
+                    <td class="text-center">{{lst.password}}</td>
+                    <td class="text-center">{{lst.role}}</td>
+                    <td class="text-center">{{lst.email}}</td>
+                    <td class="text-center">
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-info">
+                            <i class="pe-7s-look btn-icon-wrapper"> </i>
+                        </button>
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-success">
+                            <i class="pe-7s-pen btn-icon-wrapper"> </i>
+                        </button>
+                        <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="deletuser(lst.id)">
+                            <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                        </button>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="d-block text-center card-footer">
+    </div>
+</div>

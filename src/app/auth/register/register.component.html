@@ -1,0 +1,75 @@
+<div class="h-100 bg-plum-plate bg-animation">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+        <div class="mx-auto app-login-box col-md-8">
+
+
+            <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+                <div class="modal-dialog w-100 mx-auto">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="h5 modal-title text-center">
+                                <h4 class="mt-2">
+                                    <div>Bienvenu</div>
+                                    <span>Veuillez s'enregistrer.</span>
+                                </h4>
+                            </div>
+
+                            <div id="exampleInputGroup0" role="group"
+                                aria-describedby="exampleInputGroup0__BV_description_" class="mb-3">
+                                <div>
+                                    <input id="exampleInput0" type="text" placeholder="Enter full name..."
+                                        required="required" aria-required="true" class="form-control"
+                                        aria-describedby="exampleInputGroup0__BV_description_" formControlName="fullName"
+                                        
+                                        [ngClass]="{ 'is-invalid':(submitted || registerForm.get('fullName').touched) && registerForm.get('fullName').errors }">
+                                    <small tabindex="-1" id="exampleInputGroup0__BV_description_"
+                                        class="form-text text-muted">
+                                        Entrer votre nom complete
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div id="exampleInputGroup1" role="group"
+                                aria-describedby="exampleInputGroup1__BV_description_" class="mb-3">
+                                <div>
+                                    <input id="exampleInput1" type="email" placeholder="Enter votre Identifiant..."
+                                        required="required" aria-required="true" class="form-control"
+                                        aria-describedby="exampleInputGroup1__BV_description_" formControlName="identifiant"
+                                        
+                                        [ngClass]="{ 'is-invalid':(submitted || registerForm.get('identifiant').touched) && registerForm.get('identifiant').errors }">
+                                    <small tabindex="-1" id="exampleInputGroup1__BV_description_"
+                                        class="form-text text-muted">
+                                        Entrer votre Identifiant
+                                    </small>
+                                </div>
+                            </div>
+                            <div id="exampleInputGroup2" role="group" class="mb-3">
+                                <div><input id="exampleInput2" type="password" placeholder="Enter password..."
+                                        required="required" aria-required="true" class="form-control"
+                                        formControlName="password" 
+                                        [ngClass]="{ 'is-invalid':(submitted || registerForm.get('password').touched) && registerForm.get('password').errors }"
+                                        ></div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                        </div>
+                        <div class="modal-footer clearfix">
+                            <div class="float-start"><a [routerLink]="" class="btn-lg btn btn-link">Mots de passe
+                                    oublié</a>
+                            </div>
+                            <div class="float-end">
+                                <button type="button" class="btn btn-primary btn-lg">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="text-center text-white opacity-8 mt-3">
+                Copyright © CNI 2021
+            </div>
+        </div>
+    </div>
+</div>

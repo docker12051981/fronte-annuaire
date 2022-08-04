@@ -1,0 +1,64 @@
+<div class="h-100 bg-plum-plate bg-animation">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+        <div class="mx-auto app-login-box col-md-8">
+            <div class="media">
+
+                <div class="media-right pl-2 text-center">
+                    <img class="media-object img-xl" src="assets/images/tunisie.png" alt="Generic placeholder image">
+                </div>
+            </div>
+            <h1 style="text-align: center;" class="text-white">Portail des Administrateurs</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+                <div class="modal-dialog w-100 mx-auto">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="h5 modal-title text-center">
+                                <h4 class="mt-2">
+                                    <div>Bienvenu</div>
+                                    <span>Veuillez s'authentifier.</span>
+                                </h4>
+                                <div *ngIf="message!=''" class="alert alert-warning" role="alert">{{message}}</div>
+                            </div>
+                            <div id="exampleInputGroup1" role="group"
+                                aria-describedby="exampleInputGroup1__BV_description_" class="mb-3">
+                                <div>
+                                    <input id="exampleInput1" type="email" placeholder="Enter Login..."
+                                        required="required" aria-required="true" class="form-control"
+                                        aria-describedby="exampleInputGroup1__BV_description_" formControlName="login"
+                                        [ngClass]="{ 'is-invalid':(submitted || loginForm.get('login').touched) && loginForm.get('login').errors }">
+                                    <small tabindex="-1" id="exampleInputGroup1__BV_description_"
+                                        class="form-text text-muted">
+                                        Entrer votre Identifiant
+                                    </small>
+                                </div>
+                            </div>
+                            <div id="exampleInputGroup2" role="group" class="mb-3">
+                                <div><input id="exampleInput2" type="password" placeholder="Enter password..."
+                                        required="required" aria-required="true" class="form-control"
+                                        formControlName="password"
+                                        [ngClass]="{ 'is-invalid':(submitted || loginForm.get('password').touched) && loginForm.get('password').errors }">
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                        </div>
+                        <div class="modal-footer clearfix">
+                            <div class="float-start"><a [routerLink]="" class="btn-lg btn btn-link">Mots de passe
+                                    oublié</a>
+                            </div>
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="text-center text-white opacity-8 mt-3">
+                Copyright © CNI 2021
+            </div>
+        </div>
+    </div>
+</div>

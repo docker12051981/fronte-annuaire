@@ -1,0 +1,204 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+
+                <i class="fas fa-briefcase icon-gradient bg-amy-crisp"></i>
+            </div>
+            <div>
+                {{heading}}
+                <div class="page-title-subheading">
+                    {{subheading}}
+                </div>
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow me-3 btn btn-dark"
+                [routerLink]="['/profile/admin-structure/fournisseur']">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<form class=" needs-validation col-md-12" [formGroup]="addFournisseur" (ngSubmit)="onSubmit()">
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations du Fournisseur
+            </h3>
+
+
+
+
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibText" class="form-label form-label col-sm-2 col-form-label">Identifiant</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="raison_social" class="form-label">raison_social</label>
+                        <input id="raison_social" type="text" class="form-control" formControlName="raison_social"
+                            required
+                            [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('raison_social').touched) && addFournisseur.get('raison_social').errors }">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="matricule_fiscale" class="form-label">matricule _fiscale</label>
+                        <input id="matricule_fiscale" type="text" class="form-control text-left" dir="ltr"
+                            formControlName="matricule_fiscale" required
+                            [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('matricule_fiscale').touched) && addFournisseur.get('matricule_fiscale').errors }">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Tel</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="num_tel" class="form-label" style="text-align:left">téléphone</label>
+                        <input id="num_tel" type="text" class="form-control" dir="ltr" formControlName="num_tel"
+                            required
+                            [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('num_tel').touched) && addFournisseur.get('num_tel').errors }">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="num_fax" class="form-label" style="text-align:left">fax</label>
+                        <input id="num_fax" type="text" class="form-control" dir="ltr" formControlName="num_fax"
+                            [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('num_fax').touched) && addFournisseur.get('num_fax').errors }">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="position-relative row mb-3">
+                <label for="LibTxt" class="form-label col-sm-2 col-form-label">Adresse</label>
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="email" class="form-label" style="text-align:left">email</label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="">@</span>
+                            </div>
+                            <input id="email" type="text" class="form-control" dir="ltr" formControlName="email"
+                                [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('email').touched) && addFournisseur.get('email').errors }">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-relative mb-3">
+                        <label for="adresse" class="form-label" style="text-align:left">adresse</label>
+                        <textarea id="adresse" class="form-control" formControlName="adresse" required
+                            [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('adresse').touched) && addFournisseur.get('adresse').errors }"
+                            class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h3 class="card-title">
+                Informations de Responsable
+            </h3>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Telephone</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input id="num_tel_resp" placeholder="ex: 99 111 111" type="tel"
+                                        class="form-control" formControlName="num_tel_resp"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('num_tel_resp').touched) && addFournisseur.get('num_tel_resp').errors }">
+                                </div>
+
+
+                            </div>
+                            <hr>
+
+                            <h5 class="card-title">Email</h5>
+                            <div>
+
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="">@</span>
+                                    </div>
+                                    <input id="email_prof" placeholder="ex: foulen@gmail.com" type="email"
+                                        class="form-control" formControlName="email_resp"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('email_resp').touched) && addFournisseur.get('email_resp').errors }">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Nom</h5>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" formControlName="nom_resp"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('num_tel_resp').touched) && addFournisseur.get('num_tel_resp').errors }"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <hr>
+                            <h5 class="card-title">Prenom</h5>
+                            <div>
+                                <div class="input-group ">
+                                    <div class="input-group-text">
+                                        <span class=""><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" formControlName="prenom_resp"
+                                        [ngClass]="{ 'is-invalid':(submitted || addFournisseur.get('prenom_resp').touched) && addFournisseur.get('prenom_resp').errors }"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer col-12" style="justify-content: center;">
+
+        <div class="form-actions text-center col-md-12">
+            <button type="submit" class="btn btn-raised btn-success col-2 mr" style="margin-left: 10px;">
+                <i class="fas fa-check"></i> Enregistrer
+            </button>
+            <button type="button" (click)="clearForm()" class="btn btn-info btn-raised mr-auto col-2 mr">
+                <i class="fas fa-times"></i>Effacer
+            </button>
+        </div>
+    </div>
+    <br>
+</form>
